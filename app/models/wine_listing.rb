@@ -1,0 +1,2 @@
+class WineListing < ApplicationRecord
+end
