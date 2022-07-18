@@ -42,14 +42,11 @@ RSpec.describe "/wine_listings", type: :request do
 
   describe "should display first wine listing at /wine_listings/:id" do
     it "should return the wine listings based on given param" do
-      # SHould be listing #1, not 3. Review docs on testing this
-      get "/wine_listings/3"
+      get "/wine_listings/1"
       expect(response).to have_http_status(:success)
       expect(response.body).to include("Test Brand 1")
-      # end
     end
 
-    # describe "should return a not found when the wrong param is used" do
     it "should return a not found when the wrong param is used" do
       get "/wine_listings/35"
       expect(response).to have_http_status(:not_found)
