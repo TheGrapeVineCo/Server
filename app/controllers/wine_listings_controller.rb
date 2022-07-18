@@ -10,7 +10,11 @@ class WineListingsController < ApplicationController
 
   # GET /wine_listings/1
   def show
-    render json: @wine_listing
+    if @wine_listing
+      render json: @wine_listing
+    else
+      render json: { "error": "This wine listing cannot be located, reconfirm ID" }, status: :not_found
+    end
   end
 
   # POST /wine_listings
@@ -39,13 +43,14 @@ class WineListingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_wine_listing
-      @wine_listing = WineListing.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def wine_listing_params
-      params.require(:wine_listing).permit(:brand, :grape_variety, :year, :category, :country, :region, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_wine_listing
+    @wine_listing = WineListing.find_by_id(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def wine_listing_params
+    params.require(:wine_listing).permit(:brand, :grape_variety, :year, :category, :country, :region, :description)
+  end
 end
