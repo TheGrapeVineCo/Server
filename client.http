@@ -1,0 +1,93 @@
+### Index method
+
+GET http://localhost:3000/api/wine_listings
+
+
+-----
+
+Untested
+
+
+### Successfully posts a wine listing
+POST http://localhost:3000/api/wine_listings
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+    "brand": "",
+    "grape_variety": "",
+    "year": "",
+    "category": "",
+    "country": "",
+    "region": "",
+    "description": ""
+}
+
+### Unsuccessfully posts a wine_listing
+POST http://localhost:3000/api/wine_listings
+Content-Type: application/json
+
+{
+    "brand": ""
+}
+
+### show wine_listing id: 2
+GET http://localhost:3000/api/wine_listings/2
+
+### unsuccessfully show wine_listings id: 1000
+GET http://localhost:3000/api/jokes/1000
+
+### Succesfully update wine_listing id: 1
+PUT http://localhost:3000/api/wine_listings/1
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+    "brand": "",
+    "grape_variety": "",
+    "year": "",
+    "category": "",
+    "country": "",
+    "region": "",
+    "description": ""
+}
+
+### Sucessfully delete wine_listings id: 1
+DELETE http://localhost:3000/api/wine_listings/1
+Authorization: Bearer 
+
+### Unsucessfully delete wine_listings id: 1000
+DELETE http://localhost:3000/api/wine_listings/1000
+
+### Create user
+POST http://localhost:3000/api/auth/sign_up
+Content-Type: application/json
+
+{
+    "username": "Nga3",
+    "email": "nga3@test.com",
+    "password": "password3",
+    "password_confirmation": "password3"
+}
+
+### Sign in with correct details
+POST http://localhost:3000/api/auth/sign_in
+Content-Type: application/json
+
+{
+    "email": "nga3@test.com",
+    "password": "password3"
+}
+
+### Incorrect Sign in with correct details
+POST http://localhost:3000/api/auth/sign_in
+Content-Type: application/json
+
+{
+    "email": "nga@test.com",
+    "password": "password3"
+}
+
+### Get categories
+
+GET http://localhost:3000/api/categories
