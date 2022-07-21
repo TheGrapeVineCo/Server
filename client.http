@@ -1,15 +1,15 @@
+TESTED request
+
 ### Index method
 
-GET http://localhost:3000/api/wine_listings
-
+GET http://localhost:4000/api/wine_listings
 
 -----
 
 Untested
 
-
 ### Successfully posts a wine listing
-POST http://localhost:3000/api/wine_listings
+POST http://localhost:4000/api/wine_listings
 Content-Type: application/json
 Authorization: Bearer 
 
@@ -23,8 +23,9 @@ Authorization: Bearer
     "description": ""
 }
 
+
 ### Unsuccessfully posts a wine_listing
-POST http://localhost:3000/api/wine_listings
+POST http://localhost:4000/api/wine_listings
 Content-Type: application/json
 
 {
@@ -32,13 +33,13 @@ Content-Type: application/json
 }
 
 ### show wine_listing id: 2
-GET http://localhost:3000/api/wine_listings/2
+GET http://localhost:4000/api/wine_listings/2
 
 ### unsuccessfully show wine_listings id: 1000
-GET http://localhost:3000/api/jokes/1000
+GET http://localhost:4000/api/jokes/1000
 
 ### Succesfully update wine_listing id: 1
-PUT http://localhost:3000/api/wine_listings/1
+PUT http://localhost:4000/api/wine_listings/1
 Content-Type: application/json
 Authorization: Bearer 
 
@@ -53,14 +54,14 @@ Authorization: Bearer
 }
 
 ### Sucessfully delete wine_listings id: 1
-DELETE http://localhost:3000/api/wine_listings/1
+DELETE http://localhost:4000/api/wine_listings/1
 Authorization: Bearer 
 
 ### Unsucessfully delete wine_listings id: 1000
-DELETE http://localhost:3000/api/wine_listings/1000
+DELETE http://localhost:4000/api/wine_listings/1000
 
 ### Create user
-POST http://localhost:3000/api/auth/sign_up
+POST http://localhost:4000/api/auth/sign_up
 Content-Type: application/json
 
 {
@@ -71,7 +72,7 @@ Content-Type: application/json
 }
 
 ### Sign in with correct details
-POST http://localhost:3000/api/auth/sign_in
+POST http://localhost:4000/api/auth/sign_in
 Content-Type: application/json
 
 {
@@ -80,7 +81,7 @@ Content-Type: application/json
 }
 
 ### Incorrect Sign in with correct details
-POST http://localhost:3000/api/auth/sign_in
+POST http://localhost:4000/api/auth/sign_in
 Content-Type: application/json
 
 {
@@ -90,4 +91,4 @@ Content-Type: application/json
 
 ### Get categories
 
-GET http://localhost:3000/api/categories
+GET http://localhost:4000/api/categories

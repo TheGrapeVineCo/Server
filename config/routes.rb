@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     get '/wine_listings/:id', to: 'wine_listings#show'
     put '/wine_listings/:id', to: 'wine_listings#update'
     delete '/wine_listings/:id', to: 'wine_listings#destroy'
-    
     # scope '/auth' do
     #   post '/sign_up', to: 'users#create'
     #   post '/sign_in', to: 'users#sign_in'
