@@ -22,3 +22,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+* initialising new branch for Devise setup of Users and Admin (This commment can be deleted anytime)
