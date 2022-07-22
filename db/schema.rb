@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_16_090437) do
+ActiveRecord::Schema.define(version: 2022_07_22_100620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_v1_comments", force: :cascade do |t|
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "wine_listings", force: :cascade do |t|
     t.string "brand"
@@ -26,4 +32,5 @@ ActiveRecord::Schema.define(version: 2022_07_16_090437) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+
 end
