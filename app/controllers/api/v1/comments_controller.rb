@@ -1,4 +1,5 @@
 class Api::V1::CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_api_v1_comment, only: [:show, :update, :destroy]
 
   # GET /api/v1/comments
