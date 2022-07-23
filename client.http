@@ -104,14 +104,11 @@ Content-Type: application/json
 
 ### LogOUT while logged in with a jwt auth token
 ### PASS with token from the created account
-POST http://localhost:4000/users/sign_out
+DELETE http://localhost:4000/users/sign_out
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjU4NTU3MzU4LCJleHAiOjE2NTg1NjA5NTgsImp0aSI6ImIxZTg1OThkLTRjOWUtNDI5ZS04MmI1LTk1MTI4NDM1Yjk0ZCJ9.ex1dIYTv94IDM_325f-lSh5h1hkkVt2lrkNpJTGtNHs
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1ODU5MDk5MSwiZXhwIjoxNjU5ODg2OTkxLCJqdGkiOiI3YjRiNDkxMi0zZmJkLTRjMmItYmQ2OS02NWU2NTNiZjYzYjIifQ.DULwSNpMCvgjl4-O9EiWyhzmiUIMZf_KzjQDKVAn4tg
 
-{
-    "email": "nga2@test.com",
-    "password": "password2"
-}
+
 
 ### Unsuccessfully login without JWT
 ### NOT PASSING!!!
