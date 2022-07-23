@@ -37,7 +37,7 @@ GET http://localhost:4000/api/wine_listings/2
 
 ### unsuccessfully show wine_listings id: 1000
 ### Response = 404 Not Found
-GET http://localhost:4000/api/jokes/1000
+GET http://localhost:4000/api/wine_listings/1000
 
 ### Succesfully update wine_listing id: 6
 ### Response = 200 OK , provided all fields are given with valid entries.
@@ -67,18 +67,23 @@ DELETE http://localhost:4000/api/wine_listings/7
 DELETE http://localhost:4000/api/wine_listings/1000
 
 # --------------------------------------------------
-# Testing can commence when Users and Admin have bene created with Devise
-# Users Untested
+
+### Access member data
+# First we’ll try to access an authenticated controller without a JWT token.
+# This will fail. Because we’re not logged in
+GET http://localhost:4000/member-data
+Content-Type: application/json
+
+
+# Users NOT YET TESTED
 
 ### Create user
-POST http://localhost:4000/api/auth/sign_up
+POST http://localhost:4000/users
 Content-Type: application/json
 
 {
-    "username": "Nga3",
-    "email": "nga3@test.com",
-    "password": "password3",
-    "password_confirmation": "password3"
+    "email": "nga1@test.com",
+    "password": "password1"
 }
 
 ### Sign in with correct details
