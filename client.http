@@ -12,7 +12,7 @@ Content-Type: application/json
 # Authorization: Bearer IXtQvVtEdHw0LVZ3ajJxYZmM2lxH5poEx5ehvz+I9zZXt16j8bsAa+iBGDfsmg4a91O3xHFB5Csr3/56wo8VWGwHpHM8G+nGjkPVE5L9a/z/k9yLuJVFzX+DWk5eocxF+O21oGwZHRpX6IV1qpwz2q2wTqgunBOLytYuiGYgEw8aQQ2efuwxESVEXsu8WltnSUgs9haT7BGAQ5TjAmbPYbHnwm4Mk6LJ+HXDkf1Oe9Ql9KdSu2H1pPG3p7d8Men94qQcAA2yWSY05+ffU742An4op7RJIlNKnxef7ykpLeSkuu5euX56YlGE6A7W1TLQGoFdaSieogBU8rCJStza3t05cEQtQKuxbOaSvM13b++eIbfPBMDrfo+G1BLai3Hzt1oB/l7mHN/WhFXOsz3nlf9Mmcs3wT5MKEq1--/HzZNlkEjUZvKWmu--L6jB9wXfmTcENo7wDpVOig==
 
 {
-    "brand": "Wine By Farr",
+    "brand": "Testing for creating wine id 7",
     "grape_variety": "Pinot Noir",
     "year": "2020",
     "category": "Red",
@@ -46,7 +46,7 @@ PUT http://localhost:4000/api/wine_listings/6
 Content-Type: application/json
 
 {
-    "brand": "test for successfully updating id: 6 without Authorization bearer secret key",
+    "brand": "2nd test for successfully updating id: 6 without Authorization bearer secret key",
     "grape_variety": "test for successfully updating id: 6",
     "year": "2022",
     "category": "test for successfully updating id: 6",
@@ -67,28 +67,58 @@ DELETE http://localhost:4000/api/wine_listings/7
 DELETE http://localhost:4000/api/wine_listings/1000
 
 # --------------------------------------------------
-# Testing can commence when Users and Admin have bene created with Devise
-# Users Untested
+
+# Users NOT YET tested
 
 ### Create user
-POST http://localhost:4000/api/auth/sign_up
+### Using secret key from credentials.yml.enc
+POST http://localhost:4000/users
 Content-Type: application/json
+Authorization: Bearer IXtQvVtEdHw0LVZ3ajJxYZmM2lxH5poEx5ehvz+I9zZXt16j8bsAa+iBGDfsmg4a91O3xHFB5Csr3/56wo8VWGwHpHM8G+nGjkPVE5L9a/z/k9yLuJVFzX+DWk5eocxF+O21oGwZHRpX6IV1qpwz2q2wTqgunBOLytYuiGYgEw8aQQ2efuwxESVEXsu8WltnSUgs9haT7BGAQ5TjAmbPYbHnwm4Mk6LJ+HXDkf1Oe9Ql9KdSu2H1pPG3p7d8Men94qQcAA2yWSY05+ffU742An4op7RJIlNKnxef7ykpLeSkuu5euX56YlGE6A7W1TLQGoFdaSieogBU8rCJStza3t05cEQtQKuxbOaSvM13b++eIbfPBMDrfo+G1BLai3Hzt1oB/l7mHN/WhFXOsz3nlf9Mmcs3wT5MKEq1--/HzZNlkEjUZvKWmu--L6jB9wXfmTcENo7wDpVOig==
 
 {
-    "username": "Nga3",
-    "email": "nga3@test.com",
-    "password": "password3",
-    "password_confirmation": "password3"
+    "email": "nga.dang.rampling@gmail.com",
+    "password": "password1"
 }
 
 ### Sign in with correct details
-POST http://localhost:4000/api/auth/sign_in
+### Using secret key from credentials.yml.enc
+POST http://localhost:4000/users/sign_in
 Content-Type: application/json
+Authorization: Bearer IXtQvVtEdHw0LVZ3ajJxYZmM2lxH5poEx5ehvz+I9zZXt16j8bsAa+iBGDfsmg4a91O3xHFB5Csr3/56wo8VWGwHpHM8G+nGjkPVE5L9a/z/k9yLuJVFzX+DWk5eocxF+O21oGwZHRpX6IV1qpwz2q2wTqgunBOLytYuiGYgEw8aQQ2efuwxESVEXsu8WltnSUgs9haT7BGAQ5TjAmbPYbHnwm4Mk6LJ+HXDkf1Oe9Ql9KdSu2H1pPG3p7d8Men94qQcAA2yWSY05+ffU742An4op7RJIlNKnxef7ykpLeSkuu5euX56YlGE6A7W1TLQGoFdaSieogBU8rCJStza3t05cEQtQKuxbOaSvM13b++eIbfPBMDrfo+G1BLai3Hzt1oB/l7mHN/WhFXOsz3nlf9Mmcs3wT5MKEq1--/HzZNlkEjUZvKWmu--L6jB9wXfmTcENo7wDpVOig==
 
 {
-    "email": "nga3@test.com",
-    "password": "password3"
+    "email": "nga.dang.rampling@gmail.com",
+    "password": "password1"
 }
+
+# -------------------------------------------
+
+### NOT YET TESTED
+### New
+POST http://localhost:4000/users/sign_up
+Content-Type: application/json
+Authorization: Bearer IXtQvVtEdHw0LVZ3ajJxYZmM2lxH5poEx5ehvz+I9zZXt16j8bsAa+iBGDfsmg4a91O3xHFB5Csr3/56wo8VWGwHpHM8G+nGjkPVE5L9a/z/k9yLuJVFzX+DWk5eocxF+O21oGwZHRpX6IV1qpwz2q2wTqgunBOLytYuiGYgEw8aQQ2efuwxESVEXsu8WltnSUgs9haT7BGAQ5TjAmbPYbHnwm4Mk6LJ+HXDkf1Oe9Ql9KdSu2H1pPG3p7d8Men94qQcAA2yWSY05+ffU742An4op7RJIlNKnxef7ykpLeSkuu5euX56YlGE6A7W1TLQGoFdaSieogBU8rCJStza3t05cEQtQKuxbOaSvM13b++eIbfPBMDrfo+G1BLai3Hzt1oB/l7mHN/WhFXOsz3nlf9Mmcs3wT5MKEq1--/HzZNlkEjUZvKWmu--L6jB9wXfmTcENo7wDpVOig==
+
+{
+    "email": "nga2@gtest.com",
+    "password": "password2"
+}
+
+
+### Unsuccessfully Create user
+### Response: 200 OK message: "Signed up failure."
+POST http://localhost:4000/users
+Content-Type: application/json
+Authorization: Bearer 581ed96b892a1b9195dd983c578730131503a6d2eb2aebb69d7c3b376288f50cbfa7b246219a5f48efe35dc0ec798db1c58fc9fdbdc9e2f9cd263bd45dccdc7c
+
+{
+    "username": "Nga1testforfail",
+    "email": "nga.dang.rampling@gmail.com",
+    "password": "password1"
+}
+
+
 
 ### Incorrect Sign in with correct details
 POST http://localhost:4000/api/auth/sign_in
