@@ -69,26 +69,42 @@ DELETE http://localhost:4000/api/wine_listings/1000
 # --------------------------------------------------
 
 ### Access member data
-# First we’ll try to access an authenticated controller without a JWT token.
-# This will fail. Because we’re not logged in
+### Pass 
 GET http://localhost:4000/member-data
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjU4NTYwMTU3LCJleHAiOjE2NTg1NjM3NTcsImp0aSI6IjkxNjRlNzY1LTAwMzktNDk2Ny1hZWI5LTJkYjc3OTgyOGI0NyJ9.MeM_CqfGUUuk8N1nKRowKbDEEcNBsMtfqWg_A4QBs9s
+
+
+### Create user
+### 
+POST http://localhost:4000/sign_up
+Content-Type: application/json
+
+{  
+    "user": {
+        "email": "me4@gmail.com",
+        "password": "password4"
+    }
+}
+
+
+### Login with correct details
+### PASS with token from the created account
+POST http://localhost:4000/sign_in
+Content-Type: application/json
+
+{  
+    "user": {
+        "email": "me4@gmail.com",
+        "password": "password4"
+    }
+}
 
 ### CURRENTLY TESTING...
 
-### Create user
-POST http://localhost:4000/users
-Content-Type: application/json
-
-{
-    "email": "nga2@test.com",
-    "password": "password2"
-}
-### ----------------------------------------------
-### Users NOT YET TESTED
-
-### Sign in with correct details
-POST http://localhost:4000/users/sign_in
+### LogOUT while logged in with a jwt auth token
+### PASS with token from the created account
+POST http://localhost:4000/users/sign_out
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjU4NTU3MzU4LCJleHAiOjE2NTg1NjA5NTgsImp0aSI6ImIxZTg1OThkLTRjOWUtNDI5ZS04MmI1LTk1MTI4NDM1Yjk0ZCJ9.ex1dIYTv94IDM_325f-lSh5h1hkkVt2lrkNpJTGtNHs
 
@@ -97,14 +113,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1Z
     "password": "password2"
 }
 
-### Incorrect Sign in with correct details
-POST http://localhost:4000/api/auth/sign_in
+### Unsuccessfully login without JWT
+### NOT PASSING!!!
+POST http://localhost:4000/users/sign_in
 Content-Type: application/json
 
 {
-    "email": "nga@test.com",
-    "password": "password3"
+    "email": "nga2@test.com",
+    "password": "password2"
 }
+
+### ----------------------------------------------
+### CATEGORY NOT YET TESTED
 
 ### Get categories
 
