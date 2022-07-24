@@ -4,8 +4,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   devise_scope :user do
-    post 'sign_in', to: 'users/sessions#create'
-    post 'sign_up', to: 'users/registrations#create'
+    post 'api/login', to: 'users/sessions#create'
+    delete 'api/logout', to: 'users/sessions#destroy'
+    post 'api/sign_up', to: 'users/registrations#create'
     get 'forgot_password', to: 'users/passwords#new'
     get 'reset_password', to: 'users/passwords#edit'
   end

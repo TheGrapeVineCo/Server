@@ -77,20 +77,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1Z
 
 ### Create user
 ### 
-POST http://localhost:4000/sign_up
+POST http://localhost:4000/api/sign_up
 Content-Type: application/json
 
 {  
     "user": {
-        "email": "me4@gmail.com",
-        "password": "password4"
+        "email": "me5@gmail.com",
+        "password": "password5"
     }
 }
 
 
 ### Login with correct details
 ### PASS with token from the created account
-POST http://localhost:4000/sign_in
+POST http://localhost:4000/api/login
 Content-Type: application/json
 
 {  
@@ -100,15 +100,13 @@ Content-Type: application/json
     }
 }
 
-### CURRENTLY TESTING...
-
 ### LogOUT while logged in with a jwt auth token
 ### PASS with token from the created account
-DELETE http://localhost:4000/users/sign_out
+DELETE http://localhost:4000/api/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1ODU5MDk5MSwiZXhwIjoxNjU5ODg2OTkxLCJqdGkiOiI3YjRiNDkxMi0zZmJkLTRjMmItYmQ2OS02NWU2NTNiZjYzYjIifQ.DULwSNpMCvgjl4-O9EiWyhzmiUIMZf_KzjQDKVAn4tg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1ODYzMzYwMSwiZXhwIjoxNjU5OTI5NjAxLCJqdGkiOiIwNWZiN2I0Zi03MmI0LTQ1OTMtODFiYy1hNmIyM2NlYTNjYmEifQ.lO1_6zmyiqfZrOb2THM0JVomXn8-iKF19wO-96Rx4d8
 
-
+### CURRENTLY TESTING...
 
 ### Unsuccessfully login without JWT
 ### NOT PASSING!!!
