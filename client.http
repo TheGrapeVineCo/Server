@@ -101,12 +101,13 @@ Content-Type: application/json
 }
 
 ### LogOUT while logged in with a jwt auth token
-### PASS with token from the created account
+### PASS with token from the login session
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1ODYzMzYwMSwiZXhwIjoxNjU5OTI5NjAxLCJqdGkiOiIwNWZiN2I0Zi03MmI0LTQ1OTMtODFiYy1hNmIyM2NlYTNjYmEifQ.lO1_6zmyiqfZrOb2THM0JVomXn8-iKF19wO-96Rx4d8
 
-### CURRENTLY TESTING...
+
+###Not yet tested
 
 ### Unsuccessfully login without JWT
 ### NOT PASSING!!!
@@ -117,6 +118,23 @@ Content-Type: application/json
     "email": "nga2@test.com",
     "password": "password2"
 }
+
+### CURRENTLY TESTING...
+
+### ADMIN section
+
+### Create Admin user
+POST http://localhost:4000/api/sign_up
+Content-Type: application/json
+
+{  
+    "user": {
+        "email": "admin1@gmail.com",
+        "password": "password1"
+    }
+}
+
+
 
 ### ----------------------------------------------
 ### CATEGORY NOT YET TESTED
