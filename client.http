@@ -1,0 +1,126 @@
+TESTED request
+
+### Index method
+
+GET http://localhost:4000/api/wine_listings
+
+### Successfully creates a wine listing
+### Response = 201 Created
+### Currently creating without Authorization Bearer and Secret Key
+POST http://localhost:4000/api/wine_listings
+Content-Type: application/json
+# Authorization: Bearer IXtQvVtEdHw0LVZ3ajJxYZmM2lxH5poEx5ehvz+I9zZXt16j8bsAa+iBGDfsmg4a91O3xHFB5Csr3/56wo8VWGwHpHM8G+nGjkPVE5L9a/z/k9yLuJVFzX+DWk5eocxF+O21oGwZHRpX6IV1qpwz2q2wTqgunBOLytYuiGYgEw8aQQ2efuwxESVEXsu8WltnSUgs9haT7BGAQ5TjAmbPYbHnwm4Mk6LJ+HXDkf1Oe9Ql9KdSu2H1pPG3p7d8Men94qQcAA2yWSY05+ffU742An4op7RJIlNKnxef7ykpLeSkuu5euX56YlGE6A7W1TLQGoFdaSieogBU8rCJStza3t05cEQtQKuxbOaSvM13b++eIbfPBMDrfo+G1BLai3Hzt1oB/l7mHN/WhFXOsz3nlf9Mmcs3wT5MKEq1--/HzZNlkEjUZvKWmu--L6jB9wXfmTcENo7wDpVOig==
+
+{
+    "brand": "Wine By Farr",
+    "grape_variety": "Pinot Noir",
+    "year": "2020",
+    "category": "Red",
+    "country": "Australia",
+    "region": "Geelong",
+    "description": "Great deep colour, and sweet spice aromas, with a much firmer palate than we see in the Sangreal. These wines have a perfect fade from fruit to structure, a velvet like character, really complex texture. It’s darker, firmer edged and more upright. You can taste a fresher fruit note, black cherries and plums and a sense of fine oak. Really impressive."
+}
+
+### Unsuccessfully posts a wine_listing.
+### Not providing Authorization bearer
+### Not providing all details required.
+### Response = 422 Unprocessable Entity
+POST http://localhost:4000/api/wine_listings
+Content-Type: application/json
+
+{
+    "brand": ""
+}
+
+### show wine_listing id: 2
+GET http://localhost:4000/api/wine_listings/2
+
+### unsuccessfully show wine_listings id: 1000
+### Response = 404 Not Found
+GET http://localhost:4000/api/wine_listings/1000
+
+### Succesfully update wine_listing id: 6
+### Response = 200 OK , provided all fields are given with valid entries.
+### Currently works without Authorization: Bearer IXtQvVtEdHw0LVZ3ajJxYZmM2lxH5poEx5ehvz+I9zZXt16j8bsAa+iBGDfsmg4a91O3xHFB5Csr3/56wo8VWGwHpHM8G+nGjkPVE5L9a/z/k9yLuJVFzX+DWk5eocxF+O21oGwZHRpX6IV1qpwz2q2wTqgunBOLytYuiGYgEw8aQQ2efuwxESVEXsu8WltnSUgs9haT7BGAQ5TjAmbPYbHnwm4Mk6LJ+HXDkf1Oe9Ql9KdSu2H1pPG3p7d8Men94qQcAA2yWSY05+ffU742An4op7RJIlNKnxef7ykpLeSkuu5euX56YlGE6A7W1TLQGoFdaSieogBU8rCJStza3t05cEQtQKuxbOaSvM13b++eIbfPBMDrfo+G1BLai3Hzt1oB/l7mHN/WhFXOsz3nlf9Mmcs3wT5MKEq1--/HzZNlkEjUZvKWmu--L6jB9wXfmTcENo7wDpVOig==
+PUT http://localhost:4000/api/wine_listings/6
+Content-Type: application/json
+
+{
+    "brand": "test for successfully updating id: 6 without Authorization bearer secret key",
+    "grape_variety": "test for successfully updating id: 6",
+    "year": "2022",
+    "category": "test for successfully updating id: 6",
+    "country": "test for successfully updating id: 6",
+    "region": "test for successfully updating id: 6",
+    "description": "test for successfully updating id: 6"
+}
+
+
+### Sucessfully delete wine_listings id: 7
+### Currently able to delete without Authorization Bearer of secret key
+### Response = 204 :no_content
+DELETE http://localhost:4000/api/wine_listings/7
+# Authorization: Bearer 
+
+### Intentionally, Unsucessfully delete wine_listings id: 1000
+### Response = 500 :internal_server_error
+DELETE http://localhost:4000/api/wine_listings/1000
+
+# --------------------------------------------------
+
+### Access member data
+### Pass 
+GET http://localhost:4000/member-data
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjU4NTYwMTU3LCJleHAiOjE2NTg1NjM3NTcsImp0aSI6IjkxNjRlNzY1LTAwMzktNDk2Ny1hZWI5LTJkYjc3OTgyOGI0NyJ9.MeM_CqfGUUuk8N1nKRowKbDEEcNBsMtfqWg_A4QBs9s
+
+
+### Create user
+### 
+POST http://localhost:4000/api/sign_up
+Content-Type: application/json
+
+{  
+    "user": {
+        "email": "me5@gmail.com",
+        "password": "password5"
+    }
+}
+
+
+### Login with correct details
+### PASS with token from the created account
+POST http://localhost:4000/api/login
+Content-Type: application/json
+
+{  
+    "user": {
+        "email": "me4@gmail.com",
+        "password": "password4"
+    }
+}
+
+### LogOUT while logged in with a jwt auth token
+### PASS with token from the created account
+DELETE http://localhost:4000/api/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1ODYzMzYwMSwiZXhwIjoxNjU5OTI5NjAxLCJqdGkiOiIwNWZiN2I0Zi03MmI0LTQ1OTMtODFiYy1hNmIyM2NlYTNjYmEifQ.lO1_6zmyiqfZrOb2THM0JVomXn8-iKF19wO-96Rx4d8
+
+### CURRENTLY TESTING...
+
+### Unsuccessfully login without JWT
+### NOT PASSING!!!
+POST http://localhost:4000/users/sign_in
+Content-Type: application/json
+
+{
+    "email": "nga2@test.com",
+    "password": "password2"
+}
+
+### ----------------------------------------------
+### CATEGORY NOT YET TESTED
+
+### Get categories
+
+GET http://localhost:4000/api/categories
