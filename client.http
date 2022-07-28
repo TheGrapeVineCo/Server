@@ -82,8 +82,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "email": "me5@gmail.com",
-        "password": "password5"
+        "email": "me7@gmail.com",
+        "password": "password7"
     }
 }
 
@@ -95,8 +95,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "email": "me4@gmail.com",
-        "password": "password4"
+        "email": "me7@gmail.com",
+        "password": "password7"
     }
 }
 
@@ -105,6 +105,10 @@ Content-Type: application/json
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1ODYzMzYwMSwiZXhwIjoxNjU5OTI5NjAxLCJqdGkiOiIwNWZiN2I0Zi03MmI0LTQ1OTMtODFiYy1hNmIyM2NlYTNjYmEifQ.lO1_6zmyiqfZrOb2THM0JVomXn8-iKF19wO-96Rx4d8
+
+### Test for current user is admin?
+### This test might need to be ran with rspec
+
 
 
 ###Not yet tested

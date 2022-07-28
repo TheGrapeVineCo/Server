@@ -1,4 +1,5 @@
 class WineListingsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   before_action :set_wine_listing, only: [:show, :update, :destroy]
 
   # GET /wine_listings
@@ -20,6 +21,9 @@ class WineListingsController < ApplicationController
   # POST /wine_listings
   def create
     @wine_listing = WineListing.new(wine_listing_params)
+
+    # Specify authorisation here.
+    # Admin role only function
 
     if @wine_listing.save
       render json: @wine_listing, status: :created, location: @wine_listing
