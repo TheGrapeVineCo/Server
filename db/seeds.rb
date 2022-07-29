@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+if User.count == 0
+  User.create(email: "testadmin@test.com", password: "adminpw1", password_confirmation: "adminpw1", admin: true)
+end
+
 if WineListing.count == 0
   WineListing.create(
     brand: "Torbreck",
