@@ -1,17 +1,22 @@
 class CommentsController < ApplicationController
+  # ensures only authenticated users can post
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_comment, only: [:show, :update, :destroy]
 
   # GET /comments
   def index
-    @comments = Comment.order("updated_at DESC")
-
+    # @comments = Comment.order("updated_at DESC")
+    @comments = []
+    Comment.order("updated_at DESC").each do |comment|
+      @comments << comment.transform_comment
+    end
     render json: @comments
   end
 
   # GET /comments/1
   def show
     if @comment
-      render json: @comment
+      render json: @comment.transform_comment
     else
       render json: { "error": "This comment cannot be located, reconfirm the ID" }, status: :not_found
     end

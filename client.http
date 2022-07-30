@@ -157,7 +157,8 @@ Content-Type: application/json
 
 
 ### Create comment
-### Passes with 201 created response
+### Passes with 201 created response if user signed in with token
+### Returns 401 if not signed in
 POST http://localhost:4000/comments
 Content-Type: application/json
 

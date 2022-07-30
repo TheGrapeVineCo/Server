@@ -50,7 +50,7 @@ RSpec.describe "/wine_listings", type: :request do
     it "should return a not found when the wrong param is used" do
       get "/wine_listings/35"
       expect(response).to have_http_status(:not_found)
-      expect(response.body).to include("This wine listing cannot be located, reconfirm ID")
+      expect(response.body).to include("This wine listing cannot be located, reconfirm the ID")
     end
   end
 
