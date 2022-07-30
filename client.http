@@ -82,8 +82,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "email": "me7@gmail.com",
-        "password": "password7"
+        "email": "jacqui@test.com",
+        "password": "password"
     }
 }
 
@@ -95,8 +95,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "email": "me7@gmail.com",
-        "password": "password7"
+        "email": "jacqui@test.com",
+        "password": "password"
     }
 }
 
