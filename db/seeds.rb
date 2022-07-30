@@ -81,8 +81,8 @@ end
 if Comment.count == 0
   (1..15).each do |comment|
     Comment.create(
-      user: Faker::Internet.safe_email,
-      wine_listing: rand(1..6),
+      user_id: rand(1..10),
+      wine_listing_id: rand(1..6),
       user_comment: Faker::Hipster.sentence,
     )
   end
