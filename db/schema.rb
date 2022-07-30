@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_24_110148) do
+ActiveRecord::Schema.define(version: 2022_07_30_034749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "wine_listing_id", null: false
+    t.text "user_comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["wine_listing_id"], name: "index_comments_on_wine_listing_id"
+  end
 
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
@@ -30,6 +40,7 @@ ActiveRecord::Schema.define(version: 2022_07_24_110148) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "admin", default: false
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -46,4 +57,6 @@ ActiveRecord::Schema.define(version: 2022_07_24_110148) do
     t.text "description"
   end
 
+  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "wine_listings"
 end

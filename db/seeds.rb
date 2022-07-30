@@ -6,10 +6,29 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# if User.count == 0
+#   User.create(email: "testadmin@test.com", password: "adminpw1", password_confirmation: "adminpw1", admin: true)
+# end
+
+# Generate 10 users if the users table is empty
 if User.count == 0
-  User.create(email: "testadmin@test.com", password: "adminpw1", password_confirmation: "adminpw1", admin: true)
+  (1..10).each do |user|
+    User.create(
+      email: Faker::Internet.safe_email,
+      password: Faker::Internet.password,
+      password_confirmation: Faker::Internet.password,
+      admin: false,
+    )
+  end
+  User.create(
+    email: "testadmin@test.com",
+    password: "adminpw1",
+    password_confirmation: "adminpw1",
+    admin: true,
+  )
 end
 
+# Generate 6 wine listings if the wine listings table is empty
 if WineListing.count == 0
   WineListing.create(
     brand: "Torbreck",
@@ -56,4 +75,15 @@ if WineListing.count == 0
     region: "Tasmania",
     description: "Tolpuddle Vineyard Chardonnay reflects the cool maritime climate of Tasmania's Coal River Valley. The result is fine and precise Chardonnay with a backbone of firm acidity, and a combination of lightness of texture and intensity of flavour.",
   )
+end
+
+# Generate 10 users if the users table is empty
+if Comment.count == 0
+  (1..15).each do |comment|
+    Comment.create(
+      user_id: rand(1..10),
+      wine_listing_id: rand(1..6),
+      user_comment: Faker::Hipster.sentence,
+    )
+  end
 end
