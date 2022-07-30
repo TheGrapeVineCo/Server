@@ -4,7 +4,7 @@ class WineListingsController < ApplicationController
 
   # GET /wine_listings
   def index
-    @wine_listings = WineListing.all
+    @wine_listings = WineListing.order("created_at DESC")
 
     render json: @wine_listings
   end
@@ -14,7 +14,7 @@ class WineListingsController < ApplicationController
     if @wine_listing
       render json: @wine_listing
     else
-      render json: { "error": "This wine listing cannot be located, reconfirm ID" }, status: :not_found
+      render json: { "error": "This wine listing cannot be located, reconfirm the ID" }, status: :not_found
     end
   end
 

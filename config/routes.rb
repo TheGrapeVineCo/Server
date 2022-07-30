@@ -8,11 +8,10 @@ Rails.application.routes.draw do
     delete "/wine_listings/:id", to: "wine_listings#destroy"
   end
 
-  resources :comments
   devise_for :users, controllers: {
-            sessions: "users/sessions",
-            registrations: "users/registrations",
-          }
+                       sessions: "users/sessions",
+                       registrations: "users/registrations",
+                     }
   devise_scope :user do
     post "api/login", to: "users/sessions#create"
     delete "api/logout", to: "users/sessions#destroy"
