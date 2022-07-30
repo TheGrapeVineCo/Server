@@ -57,4 +57,9 @@ class WineListingsController < ApplicationController
   def wine_listing_params
     params.require(:wine_listing).permit(:brand, :grape_variety, :year, :category, :country, :region, :description)
   end
+
+  # Unsure these params are required, or if params should be named 'user_ids'
+  def user_params
+    params.require(:wine_listing).permit(user_ids: [])
+  end
 end
