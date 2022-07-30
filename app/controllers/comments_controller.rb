@@ -10,7 +10,11 @@ class CommentsController < ApplicationController
 
   # GET /comments/1
   def show
-    render json: @comment
+    if @comment
+      render json: @comment
+    else
+      render json: { "error": "This comment cannot be located, reconfirm the ID" }, status: :not_found
+    end
   end
 
   # POST /comments

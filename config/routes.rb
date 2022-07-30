@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :wine_listings
   scope "/api" do
     get "/wine_listings", to: "wine_listings#index"

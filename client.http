@@ -9,7 +9,7 @@ GET http://localhost:4000/api/wine_listings
 ### Currently creating without Authorization Bearer and Secret Key
 POST http://localhost:4000/api/wine_listings
 Content-Type: application/json
-# Authorization: Bearer IXtQvVtEdHw0LVZ3ajJxYZmM2lxH5poEx5ehvz+I9zZXt16j8bsAa+iBGDfsmg4a91O3xHFB5Csr3/56wo8VWGwHpHM8G+nGjkPVE5L9a/z/k9yLuJVFzX+DWk5eocxF+O21oGwZHRpX6IV1qpwz2q2wTqgunBOLytYuiGYgEw8aQQ2efuwxESVEXsu8WltnSUgs9haT7BGAQ5TjAmbPYbHnwm4Mk6LJ+HXDkf1Oe9Ql9KdSu2H1pPG3p7d8Men94qQcAA2yWSY05+ffU742An4op7RJIlNKnxef7ykpLeSkuu5euX56YlGE6A7W1TLQGoFdaSieogBU8rCJStza3t05cEQtQKuxbOaSvM13b++eIbfPBMDrfo+G1BLai3Hzt1oB/l7mHN/WhFXOsz3nlf9Mmcs3wT5MKEq1--/HzZNlkEjUZvKWmu--L6jB9wXfmTcENo7wDpVOig==
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNCIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTE1NDQwMCwiZXhwIjoxNjYwNDUwNDAwLCJqdGkiOiI0ZmQ5ODVjYy0yZTFiLTQyYWEtODczMC1jODkwYTljZjVmODUifQ.-Iu3jFbybuPpIch9FHx8mYQEU8vmoR7e_-sv8e2dZ7k
 
 {
     "brand": "Wine By Farr",
@@ -82,7 +82,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "email": "jacqui@test.com",
+        "email": "test@test.com",
+        "username": "123456",
         "password": "password"
     }
 }
@@ -94,8 +95,9 @@ POST http://localhost:4000/api/login
 Content-Type: application/json
 
 {  
-    "user": {
-        "email": "jacqui@test.com",
+   "user": {
+        "email": "test@test.com",
+        "username": "123456",
         "password": "password"
     }
 }
@@ -104,7 +106,7 @@ Content-Type: application/json
 ### PASS with token from the login session
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1ODYzMzYwMSwiZXhwIjoxNjU5OTI5NjAxLCJqdGkiOiIwNWZiN2I0Zi03MmI0LTQ1OTMtODFiYy1hNmIyM2NlYTNjYmEifQ.lO1_6zmyiqfZrOb2THM0JVomXn8-iKF19wO-96Rx4d8
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNCIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTE1NDIxMCwiZXhwIjoxNjYwNDUwMjEwLCJqdGkiOiJhNWZjM2RjNC1jOTg3LTRjYTAtOTY0Mi0yMmI0MGJlOThiMmYifQ.Rx4FBj4mME6i02QFORr09p39MjXIMYGDo0E19_2TZqo
 
 ### Test for current user is admin?
 ### This test might need to be ran with rspec
@@ -146,3 +148,23 @@ Content-Type: application/json
 ### Get categories
 
 GET http://localhost:4000/api/categories
+
+
+### Gets all comments
+### Passes with 200 response
+GET http://localhost:4000/comments
+Content-Type: application/json
+
+
+### Create comment
+### Passes with 201 created response
+POST http://localhost:4000/comments
+Content-Type: application/json
+
+{  
+    "comment": {
+        "user_comment": "Test comment 1",
+        "user_id": 1,
+        "wine_listing_id": 1
+    }
+}
