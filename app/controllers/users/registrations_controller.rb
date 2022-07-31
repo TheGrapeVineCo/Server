@@ -1,8 +1,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
     respond_to :json
 
-    
-  
+    # POST /comments
+  # def create
+  #   @user = User.create(sign_up_params);
+  # end
+
     private
   
     def respond_with(resource, _opts = {})
@@ -18,4 +21,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def register_failed
       render json: { message: "Something went wrong." }
     end
+
+    # Notice the name of the method
+    # def sign_up_params
+    #   params.require(:user).permit(:username, :email, :password)
+    # end
+
 end
