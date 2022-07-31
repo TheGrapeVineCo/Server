@@ -2,7 +2,7 @@ TESTED request
 
 ### Index method
 
-GET https://grapevine-rails-api.herokuapp.com/api/wine_listings
+GET http://localhost:4000/api/wine_listings
 
 ### Successfully creates a wine listing
 ### Response = 201 Created
@@ -76,29 +76,43 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1Z
 
 
 ### Create user
-### 
+### params email and password
 POST http://localhost:4000/api/sign_up
 Content-Type: application/json
 
 {  
     "user": {
-        "email": "test@test.com",
-        "username": "123456",
-        "password": "password"
+        "email": "me10@test.com",
+        "password": "password10"
+    }
+}
+
+### Create user
+### Params username, email, password
+POST http://localhost:4000/api/sign_up
+Content-Type: application/json
+
+{  
+    "user": {
+        "username": "Username2",
+        "email": "Username2@test.com",
+        "password": "password",
+        "password_confirmation": "password"
     }
 }
 
 
 ### Login with correct details
-### PASS with token from the created account
+### PASS with correct details
 POST http://localhost:4000/api/login
 Content-Type: application/json
 
 {  
    "user": {
-        "email": "test@test.com",
-        "username": "123456",
-        "password": "password"
+        "username": "Username2",
+        "email": "Username2@test.com",
+        "password": "password",
+        "password_confirmation": "password"
     }
 }
 
@@ -106,7 +120,7 @@ Content-Type: application/json
 ### PASS with token from the login session
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNCIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTE1NDIxMCwiZXhwIjoxNjYwNDUwMjEwLCJqdGkiOiJhNWZjM2RjNC1jOTg3LTRjYTAtOTY0Mi0yMmI0MGJlOThiMmYifQ.Rx4FBj4mME6i02QFORr09p39MjXIMYGDo0E19_2TZqo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTI0MjM1MSwiZXhwIjoxNjU5MzI4NzUxLCJqdGkiOiIwYWVkYTBmNC1kNjA0LTRmODUtOTU0Zi05NzVmNTcwMGE2YTkifQ.Qt5jIiRJzM_oFn0yBIrmRssva3ix2biXcwo1BWHtAIQ
 
 ### Test for current user is admin?
 ### This test might need to be ran with rspec
