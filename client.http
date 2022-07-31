@@ -94,9 +94,10 @@ Content-Type: application/json
 
 {  
     "user": {
-        "username": "Usernameprovided",
-        "email": "withusername0@test.com",
-        "password": "password"
+        "username": "Username2",
+        "email": "Username2@test.com",
+        "password": "password",
+        "password_confirmation": "password"
     }
 }
 
@@ -108,9 +109,10 @@ Content-Type: application/json
 
 {  
    "user": {
-        "username": "Usernameprovided",
-        "email": "withusername0@test.com",
-        "password": "password"
+        "username": "Username2",
+        "email": "Username2@test.com",
+        "password": "password",
+        "password_confirmation": "password"
     }
 }
 
@@ -118,7 +120,7 @@ Content-Type: application/json
 ### PASS with token from the login session
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMCIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTI0MTkxMCwiZXhwIjoxNjU5MzI4MzEwLCJqdGkiOiJiZGRlMjg1ZC03ODk5LTRiNWItYjMzYS02NjIyNzkxM2Y4MGYifQ.EQa0QHeimdSSmfpl9ONCg84kvnMTUv_CJK4Y5LThIJI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTI0MjM1MSwiZXhwIjoxNjU5MzI4NzUxLCJqdGkiOiIwYWVkYTBmNC1kNjA0LTRmODUtOTU0Zi05NzVmNTcwMGE2YTkifQ.Qt5jIiRJzM_oFn0yBIrmRssva3ix2biXcwo1BWHtAIQ
 
 ### Test for current user is admin?
 ### This test might need to be ran with rspec
