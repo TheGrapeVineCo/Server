@@ -6,8 +6,11 @@ class Comment < ApplicationRecord
   def transform_comment
     return {
              comment: self.user_comment,
-             posted: self.updated_at,
+             updated: self.updated_at,
              username: self.user.username,
+             wine_listing_id: self.wine_listing_id,
+             user_id: self.user_id,
+             id: self.id,
            }
   end
 end

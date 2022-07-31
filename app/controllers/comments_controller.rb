@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
 
   # GET /comments
   def index
+    # @comments = Comment.transform_comment
     # @comments = Comment.order("updated_at DESC")
     @comments = []
     Comment.order("updated_at DESC").each do |comment|
