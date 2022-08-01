@@ -6,14 +6,14 @@ GET http://localhost:4000/api/wine_listings
 
 ### Successfully creates a wine listing
 ### Response = 201 Created
-### Currently creating without Authorization Bearer and Secret Key
+
 POST http://localhost:4000/api/wine_listings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
 
 {
-    "brand": "Testing Wine id 6",
-    "grape_variety": "Testing Wine id 6",
+    "brand": "Testing Wine id 8",
+    "grape_variety": "Testing Wine id 8",
     "year": "2020",
     "category": "Red",
     "country": "Australia",
@@ -22,9 +22,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhd
 }
 
 ### Testing for regular users trying to create wine listing when not allowed because regular user does not have same rights as admin users
+### JWT below was given when a regular user logged in
 POST http://localhost:4000/api/wine_listings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTMzNzgyNywiZXhwIjoxNjU5NDI0MjI3LCJqdGkiOiJiNjdiZTAzMi1lZmE3LTRhYzctYTQzNy00Yzk1NmI2ZGM5ZDcifQ.2xS342HCJfwLpTHp_I8FLaOQqIJLRw_7TXoG3tZ3kfc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2NDcwNywiZXhwIjoxNjU5NDUxMTA3LCJqdGkiOiI3NjMwNDhjNC0yMTUxLTQwY2ItODFlZS1jZDgwNWIyOTAyYzIifQ.Jqs21IjodMTJXzpag--NOmF0x_Eq91nj1Kk7V4TCE8g
 
 {
     "brand": "Testing for regular using trying to create wine listing when not allowed because regular user does not have same rights as admin users. This should fail",
@@ -54,9 +55,9 @@ GET http://localhost:4000/api/wine_listings/2
 ### Response = 404 Not Found
 GET http://localhost:4000/api/wine_listings/1000
 
-### Succesfully update wine_listing id: 6
-### Response = 200 OK , provided all fields are given with valid entries.
-### Currently works without Authorization: Bearer IXtQvVtEdHw0LVZ3ajJxYZmM2lxH5poEx5ehvz+I9zZXt16j8bsAa+iBGDfsmg4a91O3xHFB5Csr3/56wo8VWGwHpHM8G+nGjkPVE5L9a/z/k9yLuJVFzX+DWk5eocxF+O21oGwZHRpX6IV1qpwz2q2wTqgunBOLytYuiGYgEw8aQQ2efuwxESVEXsu8WltnSUgs9haT7BGAQ5TjAmbPYbHnwm4Mk6LJ+HXDkf1Oe9Ql9KdSu2H1pPG3p7d8Men94qQcAA2yWSY05+ffU742An4op7RJIlNKnxef7ykpLeSkuu5euX56YlGE6A7W1TLQGoFdaSieogBU8rCJStza3t05cEQtQKuxbOaSvM13b++eIbfPBMDrfo+G1BLai3Hzt1oB/l7mHN/WhFXOsz3nlf9Mmcs3wT5MKEq1--/HzZNlkEjUZvKWmu--L6jB9wXfmTcENo7wDpVOig==
+### The purpose of this test is to ensure that user must be logged in as Admin to be able to UPDATE wine listings
+### Response = 401 Unauthorized
+### Currently DOES NOT work without Authorization: Bearer 
 PUT http://localhost:4000/api/wine_listings/6
 Content-Type: application/json
 
@@ -159,8 +160,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "username": "Username2",
-        "email": "Username2@test.com",
+        "username": "Username3",
+        "email": "Username3@test.com",
         "password": "password",
         "password_confirmation": "password"
     }
@@ -174,8 +175,10 @@ Content-Type: application/json
 
 {  
     "user": {
-        "email": "testadmin@test.com",
-        "password": "adminpw1"
+        "username": "Username3",
+        "email": "Username3@test.com",
+        "password": "password",
+        "password_confirmation": "password"
     }
 }
 
@@ -183,7 +186,7 @@ Content-Type: application/json
 ### PASS with token from the login session
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0OTQzNSwiZXhwIjoxNjU5NDM1ODM1LCJqdGkiOiJlNjhmNmRiMS02NDQ4LTRlNjktODQyMC0yNTg3M2YyNzgxNWMifQ.YwTrhbgg_P3UoPzC6cHWQRNlezC5xuXrw1QOBJgPlOQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
 
 ### Test for current user is admin?
 ### This test might need to be ran with rspec
