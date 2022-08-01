@@ -20,25 +20,30 @@ class WineListingsController < ApplicationController
 
   # POST /wine_listings
   def create
-    @wine_listing = WineListing.new(wine_listing_params)
+    if current_user.admin? &&
+      @wine_listing = WineListing.new(wine_listing_params)
 
     # Specify authorisation here.
     # Admin role only function
 
-    if @wine_listing.save
-      render json: @wine_listing, status: :created, location: @wine_listing
+      if @wine_listing.save
+        render json: @wine_listing, status: :created, location: @wine_listing
+      else
+        render json: @wine_listing.errors, status: :unprocessable_entity
+      end
     else
-      render json: @wine_listing.errors, status: :unprocessable_entity
+      render json: { message: "Please see administrator for creating new wine listings" }
     end
   end
 
   # PATCH/PUT /wine_listings/1
   def update
-    if @wine_listing.update(wine_listing_params)
-      render json: @wine_listing
-    else
-      render json: @wine_listing.errors, status: :unprocessable_entity
-    end
+    
+      if @wine_listing.update(wine_listing_params)
+        render json: @wine_listing
+      else
+        render json: @wine_listing.errors, status: :unprocessable_entity
+      end
   end
 
   # DELETE /wine_listings/1

@@ -9,16 +9,31 @@ GET http://localhost:4000/api/wine_listings
 ### Currently creating without Authorization Bearer and Secret Key
 POST http://localhost:4000/api/wine_listings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNCIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTE1NDQwMCwiZXhwIjoxNjYwNDUwNDAwLCJqdGkiOiI0ZmQ5ODVjYy0yZTFiLTQyYWEtODczMC1jODkwYTljZjVmODUifQ.-Iu3jFbybuPpIch9FHx8mYQEU8vmoR7e_-sv8e2dZ7k
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjU5MzM3NjQ4LCJleHAiOjE2NTk0MjQwNDgsImp0aSI6IjVjNzI2NmQ5LTNjOTQtNGUxZS05YTUwLTExY2JiMTk3NjgwZSJ9.dDnbm1E2xouB1f3c-7OzMa7lP1A0sipfI0sina2kkQQ
 
 {
-    "brand": "Wine By Farr",
+    "brand": "Testing Admin params to create new wines. This is expected to succeed",
     "grape_variety": "Pinot Noir",
     "year": "2020",
     "category": "Red",
     "country": "Australia",
     "region": "Geelong",
     "description": "Great deep colour, and sweet spice aromas, with a much firmer palate than we see in the Sangreal. These wines have a perfect fade from fruit to structure, a velvet like character, really complex texture. It’s darker, firmer edged and more upright. You can taste a fresher fruit note, black cherries and plums and a sense of fine oak. Really impressive."
+}
+
+### Testing for regular users trying to create wine listing when not allowed because regular user does not have same rights as admin users
+POST http://localhost:4000/api/wine_listings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTMzNzgyNywiZXhwIjoxNjU5NDI0MjI3LCJqdGkiOiJiNjdiZTAzMi1lZmE3LTRhYzctYTQzNy00Yzk1NmI2ZGM5ZDcifQ.2xS342HCJfwLpTHp_I8FLaOQqIJLRw_7TXoG3tZ3kfc
+
+{
+    "brand": "Testing for regular using trying to create wine listing when not allowed because regular user does not have same rights as admin users. This should fail",
+    "grape_variety": "Pinot Noir",
+    "year": "2020",
+    "category": "Red",
+    "country": "Australia",
+    "region": "Geelong",
+    "description": "description for testing purposes only."
 }
 
 ### Unsuccessfully posts a wine_listing.
@@ -108,7 +123,7 @@ POST http://localhost:4000/api/login
 Content-Type: application/json
 
 {  
-   "user": {
+    "user": {
         "username": "Username2",
         "email": "Username2@test.com",
         "password": "password",
@@ -120,7 +135,7 @@ Content-Type: application/json
 ### PASS with token from the login session
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTI0MjM1MSwiZXhwIjoxNjU5MzI4NzUxLCJqdGkiOiIwYWVkYTBmNC1kNjA0LTRmODUtOTU0Zi05NzVmNTcwMGE2YTkifQ.Qt5jIiRJzM_oFn0yBIrmRssva3ix2biXcwo1BWHtAIQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjU5MzM3NjQ4LCJleHAiOjE2NTk0MjQwNDgsImp0aSI6IjVjNzI2NmQ5LTNjOTQtNGUxZS05YTUwLTExY2JiMTk3NjgwZSJ9.dDnbm1E2xouB1f3c-7OzMa7lP1A0sipfI0sina2kkQQ
 
 ### Test for current user is admin?
 ### This test might need to be ran with rspec
