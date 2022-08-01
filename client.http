@@ -70,6 +70,55 @@ Content-Type: application/json
     "description": "test for successfully updating id: 6"
 }
 
+### Currentlty testing
+### Test Admin params performing updates to wine listing id: 2
+### Test inlcudes jwt
+PUT http://localhost:4000/api/wine_listings/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0NzE0MCwiZXhwIjoxNjU5NDMzNTQwLCJqdGkiOiJmOTA3MDRmNS0zNTU2LTRkNTMtYTQ4Yi0zOTIwZTA5MTg1OTUifQ.ApqIL1iP5yc3CVFJ4nGB7gN9xnW_AFEydpbhx8cftao
+
+{
+    "brand": "test for successfully updating id:2, as an admin with correct params & JWT",
+    "grape_variety": "test update id 2",
+    "year": "2022",
+    "category": "test update id 2",
+    "country": "test update id 2",
+    "region": "test update id 2",
+    "description": "test update id 2"
+}
+
+### Successful testing of
+### a fail attempt for regular user, who is logged in, performing an update of wine listings
+### response = 204 No Content
+PUT http://localhost:4000/api/wine_listings/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0MjU3MywiZXhwIjoxNjU5NDI4OTczLCJqdGkiOiIxMTI4ZTI5My02NDE0LTRhZTctYTY2NC1jNWUxOTJhODM1YjAifQ.R5JhlDBx35rDxjll7ZzAp-3BvKeBLBwpVY5WMLMghhg
+
+{
+    "brand": "test for updating id: 4, with Auth bearer token as a regular user. This is expected to fail",
+    "grape_variety": "test",
+    "year": "2022",
+    "category": "test",
+    "country": "test",
+    "region": "test",
+    "description": "test"
+}
+
+### Currently testing
+PUT http://localhost:4000/api/wine_listings/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0MjU3MywiZXhwIjoxNjU5NDI4OTczLCJqdGkiOiIxMTI4ZTI5My02NDE0LTRhZTctYTY2NC1jNWUxOTJhODM1YjAifQ.R5JhlDBx35rDxjll7ZzAp-3BvKeBLBwpVY5WMLMghhg
+
+{
+    "brand": "test for updating id: 4, with Auth bearer token as a regular user",
+    "grape_variety": "test",
+    "year": "2022",
+    "category": "test",
+    "country": "test",
+    "region": "test",
+    "description": "test"
+}
+
 
 ### Sucessfully delete wine_listings id: 7
 ### Currently able to delete without Authorization Bearer of secret key
@@ -89,21 +138,20 @@ GET http://localhost:4000/member-data
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjU4NTYwMTU3LCJleHAiOjE2NTg1NjM3NTcsImp0aSI6IjkxNjRlNzY1LTAwMzktNDk2Ny1hZWI5LTJkYjc3OTgyOGI0NyJ9.MeM_CqfGUUuk8N1nKRowKbDEEcNBsMtfqWg_A4QBs9s
 
-
-### Create user
-### params email and password
+### THIS TEST IS NOT WORKING AS EXPECTED!!!
+### Create user with only 2 params - email and password - Should FAIL
 POST http://localhost:4000/api/sign_up
 Content-Type: application/json
 
 {  
     "user": {
-        "email": "me10@test.com",
+        "email": "2params@test.com",
         "password": "password10"
     }
 }
 
 ### Create user
-### Params username, email, password
+### 4 Params given - username, email, password, password_confirmation
 POST http://localhost:4000/api/sign_up
 Content-Type: application/json
 
@@ -124,10 +172,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "username": "Username2",
-        "email": "Username2@test.com",
-        "password": "password",
-        "password_confirmation": "password"
+        "email": "testadmin@test.com",
+        "password": "adminpw1"
     }
 }
 
@@ -135,7 +181,7 @@ Content-Type: application/json
 ### PASS with token from the login session
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjU5MzM3NjQ4LCJleHAiOjE2NTk0MjQwNDgsImp0aSI6IjVjNzI2NmQ5LTNjOTQtNGUxZS05YTUwLTExY2JiMTk3NjgwZSJ9.dDnbm1E2xouB1f3c-7OzMa7lP1A0sipfI0sina2kkQQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0MjU3MywiZXhwIjoxNjU5NDI4OTczLCJqdGkiOiIxMTI4ZTI5My02NDE0LTRhZTctYTY2NC1jNWUxOTJhODM1YjAifQ.R5JhlDBx35rDxjll7ZzAp-3BvKeBLBwpVY5WMLMghhg
 
 ### Test for current user is admin?
 ### This test might need to be ran with rspec

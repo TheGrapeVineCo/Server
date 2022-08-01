@@ -1,6 +1,7 @@
 class WineListingsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :destroy]
-  before_action :set_wine_listing, only: [:show, :update, :destroy]
+  #before_action :set_wine_listing, only: [:show, :update, :destroy]
+  before_action :set_wine_listing, only: [:show, :destroy]
 
   # GET /wine_listings
   def index
@@ -36,17 +37,19 @@ class WineListingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /wine_listings/1
+  # PUT /wine_listings/:id
   def update
-    
-      if @wine_listing.update(wine_listing_params)
+
+    if current_user.admin? &&
+      @wine_listing = WineListing.update(wine_listing_params)
         render json: @wine_listing
-      else
-        render json: @wine_listing.errors, status: :unprocessable_entity
-      end
+    else
+      render json: @wine_listing.errors, status: :unprocessable_entity
+    end
+
   end
 
-  # DELETE /wine_listings/1
+  # DELETE /wine_listings/:id
   def destroy
     @wine_listing.destroy
   end
