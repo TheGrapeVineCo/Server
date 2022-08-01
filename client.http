@@ -9,11 +9,11 @@ GET http://localhost:4000/api/wine_listings
 ### Currently creating without Authorization Bearer and Secret Key
 POST http://localhost:4000/api/wine_listings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjU5MzM3NjQ4LCJleHAiOjE2NTk0MjQwNDgsImp0aSI6IjVjNzI2NmQ5LTNjOTQtNGUxZS05YTUwLTExY2JiMTk3NjgwZSJ9.dDnbm1E2xouB1f3c-7OzMa7lP1A0sipfI0sina2kkQQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
 
 {
-    "brand": "Testing Admin params to create new wines. This is expected to succeed",
-    "grape_variety": "Pinot Noir",
+    "brand": "Testing Wine id 6",
+    "grape_variety": "Testing Wine id 6",
     "year": "2020",
     "category": "Red",
     "country": "Australia",
@@ -70,11 +70,10 @@ Content-Type: application/json
     "description": "test for successfully updating id: 6"
 }
 
-### !!!Test Failed!!!
-### Currently Testing UPDATE for Admin
-### Test as Admin user with params performing updates to wine listing id: 2
+
+### Testing UPDATE for Admin
+### Test as Admin user with params performing updates to wine listing id:
 ### Test inlcudes jwt
-### Test only updating listings with arguement provides
 PUT http://localhost:4000/api/wine_listings/3
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM1NDA2NiwiZXhwIjoxNjU5NDQwNDY2LCJqdGkiOiJjOGE0YTI0Mi1hZTY0LTQyZDMtYjI1YS04MjAzYzU1ODQxMjMifQ.BImjf2-sLtZTJvAVqHq0jk9tXDKrFxPjEMQfImJknLI
@@ -107,7 +106,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhd
 }
 
 ### NEEDS testing
-### As a regular user
+### As a regular user attempting to update wine_listing id 4
 PUT http://localhost:4000/api/wine_listings/4
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0MjU3MywiZXhwIjoxNjU5NDI4OTczLCJqdGkiOiIxMTI4ZTI5My02NDE0LTRhZTctYTY2NC1jNWUxOTJhODM1YjAifQ.R5JhlDBx35rDxjll7ZzAp-3BvKeBLBwpVY5WMLMghhg
@@ -122,13 +121,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhd
     "description": "test"
 }
 
-### Currently Testing for Admin to delete wine listing id 2
-### Sucessfully delete wine_listings id: 2
+### Currently Testing for Admin to delete wine listing id
 ### !!!Currently able to delete without Authorization Bearer of secret key!!!
 ### Response = 204 :no_content
-DELETE http://localhost:4000/api/wine_listings/2
+DELETE http://localhost:4000/api/wine_listings/7
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM1NDQwNSwiZXhwIjoxNjU5NDQwODA1LCJqdGkiOiI3MTFjYTUwZS0yZWQ3LTRhZmItOWRkMy1hZmI2ODdjYjNiMGUifQ.Xs3b5HqUBKxZT3BHJoll4n-WuIaLCY8TRqOgOA5KR2U
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
 
 ### Intentionally, Unsucessfully delete wine_listings id: 1000
 ### Response = 500 :internal_server_error

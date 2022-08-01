@@ -50,12 +50,11 @@ class WineListingsController < ApplicationController
 
   # DELETE /wine_listings/:id
   def destroy
-    # @wine_listing.destroy
     if current_user.admin? &&
-      @wine_listing.destroy
-        render json: @wine_listing
+      @wine_listing = WineListing.find(params[:id]).destroy
+        render json: { message: "Wine listing deleted!" }
     else
-      
+      render json: @wine_listing.errors, status: :unprocessable_entity
     end
   end
 
