@@ -41,17 +41,22 @@ class WineListingsController < ApplicationController
   def update
 
     if current_user.admin? &&
-      @wine_listing = WineListing.update(wine_listing_params)
+      @wine_listing = WineListing.find(params[:id]).update(wine_listing_params)
         render json: @wine_listing
     else
       render json: @wine_listing.errors, status: :unprocessable_entity
     end
-
   end
 
   # DELETE /wine_listings/:id
   def destroy
-    @wine_listing.destroy
+    # @wine_listing.destroy
+    if current_user.admin? &&
+      @wine_listing.destroy
+        render json: @wine_listing
+    else
+      
+    end
   end
 
   private

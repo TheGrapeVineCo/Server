@@ -70,15 +70,17 @@ Content-Type: application/json
     "description": "test for successfully updating id: 6"
 }
 
-### Currentlty testing
-### Test Admin params performing updates to wine listing id: 2
+### !!!Test Failed!!!
+### Currently Testing UPDATE for Admin
+### Test as Admin user with params performing updates to wine listing id: 2
 ### Test inlcudes jwt
-PUT http://localhost:4000/api/wine_listings/2
+### Test only updating listings with arguement provides
+PUT http://localhost:4000/api/wine_listings/3
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0NzE0MCwiZXhwIjoxNjU5NDMzNTQwLCJqdGkiOiJmOTA3MDRmNS0zNTU2LTRkNTMtYTQ4Yi0zOTIwZTA5MTg1OTUifQ.ApqIL1iP5yc3CVFJ4nGB7gN9xnW_AFEydpbhx8cftao
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM1NDA2NiwiZXhwIjoxNjU5NDQwNDY2LCJqdGkiOiJjOGE0YTI0Mi1hZTY0LTQyZDMtYjI1YS04MjAzYzU1ODQxMjMifQ.BImjf2-sLtZTJvAVqHq0jk9tXDKrFxPjEMQfImJknLI
 
 {
-    "brand": "test for successfully updating id:2, as an admin with correct params & JWT",
+    "brand": "test for successfully updating id:3 ONLY, as an admin with correct params & JWT",
     "grape_variety": "test update id 2",
     "year": "2022",
     "category": "test update id 2",
@@ -104,13 +106,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhd
     "description": "test"
 }
 
-### Currently testing
+### NEEDS testing
+### As a regular user
 PUT http://localhost:4000/api/wine_listings/4
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0MjU3MywiZXhwIjoxNjU5NDI4OTczLCJqdGkiOiIxMTI4ZTI5My02NDE0LTRhZTctYTY2NC1jNWUxOTJhODM1YjAifQ.R5JhlDBx35rDxjll7ZzAp-3BvKeBLBwpVY5WMLMghhg
 
 {
-    "brand": "test for updating id: 4, with Auth bearer token as a regular user",
+    "brand": "test for updating id: 4, with Auth bearer token as a regular user. expect to fail",
     "grape_variety": "test",
     "year": "2022",
     "category": "test",
@@ -119,12 +122,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhd
     "description": "test"
 }
 
-
-### Sucessfully delete wine_listings id: 7
-### Currently able to delete without Authorization Bearer of secret key
+### Currently Testing for Admin to delete wine listing id 2
+### Sucessfully delete wine_listings id: 2
+### !!!Currently able to delete without Authorization Bearer of secret key!!!
 ### Response = 204 :no_content
-DELETE http://localhost:4000/api/wine_listings/7
-# Authorization: Bearer 
+DELETE http://localhost:4000/api/wine_listings/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM1NDQwNSwiZXhwIjoxNjU5NDQwODA1LCJqdGkiOiI3MTFjYTUwZS0yZWQ3LTRhZmItOWRkMy1hZmI2ODdjYjNiMGUifQ.Xs3b5HqUBKxZT3BHJoll4n-WuIaLCY8TRqOgOA5KR2U
 
 ### Intentionally, Unsucessfully delete wine_listings id: 1000
 ### Response = 500 :internal_server_error
@@ -181,7 +185,7 @@ Content-Type: application/json
 ### PASS with token from the login session
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0MjU3MywiZXhwIjoxNjU5NDI4OTczLCJqdGkiOiIxMTI4ZTI5My02NDE0LTRhZTctYTY2NC1jNWUxOTJhODM1YjAifQ.R5JhlDBx35rDxjll7ZzAp-3BvKeBLBwpVY5WMLMghhg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0OTQzNSwiZXhwIjoxNjU5NDM1ODM1LCJqdGkiOiJlNjhmNmRiMS02NDQ4LTRlNjktODQyMC0yNTg3M2YyNzgxNWMifQ.YwTrhbgg_P3UoPzC6cHWQRNlezC5xuXrw1QOBJgPlOQ
 
 ### Test for current user is admin?
 ### This test might need to be ran with rspec
@@ -189,18 +193,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhd
 
 
 ###Not yet tested
-
-### Unsuccessfully login without JWT
-### NOT PASSING!!!
-POST http://localhost:4000/users/sign_in
-Content-Type: application/json
-
-{
-    "email": "nga2@test.com",
-    "password": "password2"
-}
-
-### CURRENTLY TESTING...
 
 ### ADMIN section
 

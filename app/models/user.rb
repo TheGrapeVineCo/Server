@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :wine_listings, through: :comments
 
-  def make_admin!
-    self.update_attribute(:admin, true)
-  end
+  # def make_admin!
+  #   self.update_attribute(:admin, true)
+  # end
 end
