@@ -23,9 +23,9 @@ class CommentsController < ApplicationController
     end
   end
 
-  # POST /comments
+  # POST /comments - only a user that is logged in & authorised can create a comment
   def create
-    @comment = Comment.new(comment_params)
+    @comment = current_user.comments.create(comment_params)
 
     if @comment.save
       render json: @comment, status: :created, location: @comment

@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  # adds validation to user_comment input to prevent user submitting an empty post
+  validates :user_comment, presence: true
   belongs_to :user
   belongs_to :wine_listing
 

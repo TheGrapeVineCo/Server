@@ -148,20 +148,20 @@ Content-Type: application/json
 
 {  
     "user": {
-        "email": "2params@test.com",
+        "email": "jacqui2@test.com",
         "password": "password10"
     }
 }
 
-### Create user
+### Create user --> not working, unpermitted param -> :username
 ### 4 Params given - username, email, password, password_confirmation
 POST http://localhost:4000/api/sign_up
 Content-Type: application/json
 
 {  
     "user": {
-        "username": "Username3",
-        "email": "Username3@test.com",
+        "username": "testtime4",
+        "email": "mrtest4@test.com",
         "password": "password",
         "password_confirmation": "password"
     }
@@ -175,10 +175,10 @@ Content-Type: application/json
 
 {  
     "user": {
-        "username": "Username3",
-        "email": "Username3@test.com",
-        "password": "password",
-        "password_confirmation": "password"
+        "username": "jayjay",
+        "email": "jacqui1@test.com",
+        "password": "password10",
+        "password_confirmation": "password10"
     }
 }
 
@@ -234,6 +234,64 @@ Content-Type: application/json
     "comment": {
         "user_comment": "Test comment 1",
         "user_id": 1,
+        "wine_listing_id": 1
+    }
+}
+
+### Create comment
+### Passes with 201 created response
+POST http://localhost:4000/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM5OTUwOCwiZXhwIjoxNjU5NDg1OTA4LCJqdGkiOiJiMDZkZDBkZC0zMTRiLTQwODItOTBiYy1kYjIwYjc2MTI2MzcifQ.y12cXmWH8RBaYnRsEewMM7J8F8afZQFTq1wC3xM8Dd0
+
+{  
+    "comment": {
+        "user_comment": "Test comment 2",
+        "user_id": 12,
+        "wine_listing_id": 1
+    }
+}
+
+### Create comment with no content in user_comment
+### Passes with 422 unprocessable entity - user comment can't be blank
+POST http://localhost:4000/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM5OTUwOCwiZXhwIjoxNjU5NDg1OTA4LCJqdGkiOiJiMDZkZDBkZC0zMTRiLTQwODItOTBiYy1kYjIwYjc2MTI2MzcifQ.y12cXmWH8RBaYnRsEewMM7J8F8afZQFTq1wC3xM8Dd0
+
+{  
+    "comment": {
+        "user_comment": "",
+        "user_id": 12,
+        "wine_listing_id": 1
+    }
+}
+
+### Update comment
+### Passes with 200 response
+PATCH http://localhost:4000/comments/16
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM5OTUwOCwiZXhwIjoxNjU5NDg1OTA4LCJqdGkiOiJiMDZkZDBkZC0zMTRiLTQwODItOTBiYy1kYjIwYjc2MTI2MzcifQ.y12cXmWH8RBaYnRsEewMM7J8F8afZQFTq1wC3xM8Dd0
+
+{  
+    "comment": {
+        "id": 16,
+        "user_comment": "Test comment 1 has been updated",
+        "user_id": 12,
+        "wine_listing_id": 1
+    }
+}
+
+### Delete comment
+### Passes with 204 no content response
+DELETE  http://localhost:4000/comments/17
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM5OTUwOCwiZXhwIjoxNjU5NDg1OTA4LCJqdGkiOiJiMDZkZDBkZC0zMTRiLTQwODItOTBiYy1kYjIwYjc2MTI2MzcifQ.y12cXmWH8RBaYnRsEewMM7J8F8afZQFTq1wC3xM8Dd0
+
+{  
+    "comment": {
+        "id": 17,
+        "user_comment": "Test comment 1",
+        "user_id": 12,
         "wine_listing_id": 1
     }
 }
