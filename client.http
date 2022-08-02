@@ -9,7 +9,7 @@ GET http://localhost:4000/api/wine_listings
 
 POST http://localhost:4000/api/wine_listings
 Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTQzNjcxMywiZXhwIjoxNjU5NTIzMTEzLCJqdGkiOiIxNWQ4Nzc5Ny04YTQ2LTQ5ZjYtODQ4OS00M2U5OTg2NjFlMDQifQ.YIAE8CHGohsYB_V4RQ5uScS9J8yfnEo5CfwlWH_Jf7k
 
 {
     "brand": "Testing Wine id 8",
@@ -160,8 +160,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "username": "testtime",
-        "email": "mrtest@test.com",
+        "username": "testtime3",
+        "email": "mrtest3@test.com",
         "password": "password",
         "password_confirmation": "password"
     }
