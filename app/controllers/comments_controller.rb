@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   # ensures only authenticated users can post
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_comment, only: [:show, :update, :destroy]
+  before_action :verify_ownership, only: [:update, :destroy]
 
   # GET /comments
   def index
@@ -58,5 +59,11 @@ class CommentsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def comment_params
     params.require(:comment).permit(:user_id, :wine_listing_id, :user_comment)
+  end
+
+  def verify_ownership
+    if current_user.id != @comment.user.id
+      render json: { error: "Unauthorised action" }
+    end
   end
 end
