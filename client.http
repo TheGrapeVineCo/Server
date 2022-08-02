@@ -6,19 +6,35 @@ GET http://localhost:4000/api/wine_listings
 
 ### Successfully creates a wine listing
 ### Response = 201 Created
-### Currently creating without Authorization Bearer and Secret Key
+
 POST http://localhost:4000/api/wine_listings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNCIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTE1NDQwMCwiZXhwIjoxNjYwNDUwNDAwLCJqdGkiOiI0ZmQ5ODVjYy0yZTFiLTQyYWEtODczMC1jODkwYTljZjVmODUifQ.-Iu3jFbybuPpIch9FHx8mYQEU8vmoR7e_-sv8e2dZ7k
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
 
 {
-    "brand": "Wine By Farr",
-    "grape_variety": "Pinot Noir",
+    "brand": "Testing Wine id 8",
+    "grape_variety": "Testing Wine id 8",
     "year": "2020",
     "category": "Red",
     "country": "Australia",
     "region": "Geelong",
     "description": "Great deep colour, and sweet spice aromas, with a much firmer palate than we see in the Sangreal. These wines have a perfect fade from fruit to structure, a velvet like character, really complex texture. It’s darker, firmer edged and more upright. You can taste a fresher fruit note, black cherries and plums and a sense of fine oak. Really impressive."
+}
+
+### Testing for regular users trying to create wine listing when not allowed because regular user does not have same rights as admin users
+### JWT below was given when a regular user logged in
+POST http://localhost:4000/api/wine_listings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2NDcwNywiZXhwIjoxNjU5NDUxMTA3LCJqdGkiOiI3NjMwNDhjNC0yMTUxLTQwY2ItODFlZS1jZDgwNWIyOTAyYzIifQ.Jqs21IjodMTJXzpag--NOmF0x_Eq91nj1Kk7V4TCE8g
+
+{
+    "brand": "Testing for regular using trying to create wine listing when not allowed because regular user does not have same rights as admin users. This should fail",
+    "grape_variety": "Pinot Noir",
+    "year": "2020",
+    "category": "Red",
+    "country": "Australia",
+    "region": "Geelong",
+    "description": "description for testing purposes only."
 }
 
 ### Unsuccessfully posts a wine_listing.
@@ -39,9 +55,9 @@ GET http://localhost:4000/api/wine_listings/2
 ### Response = 404 Not Found
 GET http://localhost:4000/api/wine_listings/1000
 
-### Succesfully update wine_listing id: 6
-### Response = 200 OK , provided all fields are given with valid entries.
-### Currently works without Authorization: Bearer IXtQvVtEdHw0LVZ3ajJxYZmM2lxH5poEx5ehvz+I9zZXt16j8bsAa+iBGDfsmg4a91O3xHFB5Csr3/56wo8VWGwHpHM8G+nGjkPVE5L9a/z/k9yLuJVFzX+DWk5eocxF+O21oGwZHRpX6IV1qpwz2q2wTqgunBOLytYuiGYgEw8aQQ2efuwxESVEXsu8WltnSUgs9haT7BGAQ5TjAmbPYbHnwm4Mk6LJ+HXDkf1Oe9Ql9KdSu2H1pPG3p7d8Men94qQcAA2yWSY05+ffU742An4op7RJIlNKnxef7ykpLeSkuu5euX56YlGE6A7W1TLQGoFdaSieogBU8rCJStza3t05cEQtQKuxbOaSvM13b++eIbfPBMDrfo+G1BLai3Hzt1oB/l7mHN/WhFXOsz3nlf9Mmcs3wT5MKEq1--/HzZNlkEjUZvKWmu--L6jB9wXfmTcENo7wDpVOig==
+### The purpose of this test is to ensure that user must be logged in as Admin to be able to UPDATE wine listings
+### Response = 401 Unauthorized
+### Currently DOES NOT work without Authorization: Bearer 
 PUT http://localhost:4000/api/wine_listings/6
 Content-Type: application/json
 
@@ -56,11 +72,62 @@ Content-Type: application/json
 }
 
 
-### Sucessfully delete wine_listings id: 7
-### Currently able to delete without Authorization Bearer of secret key
+### Testing UPDATE for Admin
+### Test as Admin user with params performing updates to wine listing id:
+### Test inlcudes jwt
+PUT http://localhost:4000/api/wine_listings/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM1NDA2NiwiZXhwIjoxNjU5NDQwNDY2LCJqdGkiOiJjOGE0YTI0Mi1hZTY0LTQyZDMtYjI1YS04MjAzYzU1ODQxMjMifQ.BImjf2-sLtZTJvAVqHq0jk9tXDKrFxPjEMQfImJknLI
+
+{
+    "brand": "test for successfully updating id:3 ONLY, as an admin with correct params & JWT",
+    "grape_variety": "test update id 2",
+    "year": "2022",
+    "category": "test update id 2",
+    "country": "test update id 2",
+    "region": "test update id 2",
+    "description": "test update id 2"
+}
+
+### Successful testing of
+### a fail attempt for regular user, who is logged in, performing an update of wine listings
+### response = 204 No Content
+PUT http://localhost:4000/api/wine_listings/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0MjU3MywiZXhwIjoxNjU5NDI4OTczLCJqdGkiOiIxMTI4ZTI5My02NDE0LTRhZTctYTY2NC1jNWUxOTJhODM1YjAifQ.R5JhlDBx35rDxjll7ZzAp-3BvKeBLBwpVY5WMLMghhg
+
+{
+    "brand": "test for updating id: 4, with Auth bearer token as a regular user. This is expected to fail",
+    "grape_variety": "test",
+    "year": "2022",
+    "category": "test",
+    "country": "test",
+    "region": "test",
+    "description": "test"
+}
+
+### NEEDS testing
+### As a regular user attempting to update wine_listing id 4
+PUT http://localhost:4000/api/wine_listings/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM0MjU3MywiZXhwIjoxNjU5NDI4OTczLCJqdGkiOiIxMTI4ZTI5My02NDE0LTRhZTctYTY2NC1jNWUxOTJhODM1YjAifQ.R5JhlDBx35rDxjll7ZzAp-3BvKeBLBwpVY5WMLMghhg
+
+{
+    "brand": "test for updating id: 4, with Auth bearer token as a regular user. expect to fail",
+    "grape_variety": "test",
+    "year": "2022",
+    "category": "test",
+    "country": "test",
+    "region": "test",
+    "description": "test"
+}
+
+### Currently Testing for Admin to delete wine listing id
+### !!!Currently able to delete without Authorization Bearer of secret key!!!
 ### Response = 204 :no_content
 DELETE http://localhost:4000/api/wine_listings/7
-# Authorization: Bearer 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
 
 ### Intentionally, Unsucessfully delete wine_listings id: 1000
 ### Response = 500 :internal_server_error
@@ -74,28 +141,27 @@ GET http://localhost:4000/member-data
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjU4NTYwMTU3LCJleHAiOjE2NTg1NjM3NTcsImp0aSI6IjkxNjRlNzY1LTAwMzktNDk2Ny1hZWI5LTJkYjc3OTgyOGI0NyJ9.MeM_CqfGUUuk8N1nKRowKbDEEcNBsMtfqWg_A4QBs9s
 
-
-### Create user
-### params email and password
+### THIS TEST IS NOT WORKING AS EXPECTED!!!
+### Create user with only 2 params - email and password - Should FAIL
 POST http://localhost:4000/api/sign_up
 Content-Type: application/json
 
 {  
     "user": {
-        "email": "me10@test.com",
+        "email": "2params@test.com",
         "password": "password10"
     }
 }
 
 ### Create user
-### Params username, email, password
+### 4 Params given - username, email, password, password_confirmation
 POST http://localhost:4000/api/sign_up
 Content-Type: application/json
 
 {  
     "user": {
-        "username": "Username2",
-        "email": "Username2@test.com",
+        "username": "Username3",
+        "email": "Username3@test.com",
         "password": "password",
         "password_confirmation": "password"
     }
@@ -108,9 +174,9 @@ POST http://localhost:4000/api/login
 Content-Type: application/json
 
 {  
-   "user": {
-        "username": "Username2",
-        "email": "Username2@test.com",
+    "user": {
+        "username": "Username3",
+        "email": "Username3@test.com",
         "password": "password",
         "password_confirmation": "password"
     }
@@ -120,7 +186,7 @@ Content-Type: application/json
 ### PASS with token from the login session
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTI0MjM1MSwiZXhwIjoxNjU5MzI4NzUxLCJqdGkiOiIwYWVkYTBmNC1kNjA0LTRmODUtOTU0Zi05NzVmNTcwMGE2YTkifQ.Qt5jIiRJzM_oFn0yBIrmRssva3ix2biXcwo1BWHtAIQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
 
 ### Test for current user is admin?
 ### This test might need to be ran with rspec
@@ -128,18 +194,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhd
 
 
 ###Not yet tested
-
-### Unsuccessfully login without JWT
-### NOT PASSING!!!
-POST http://localhost:4000/users/sign_in
-Content-Type: application/json
-
-{
-    "email": "nga2@test.com",
-    "password": "password2"
-}
-
-### CURRENTLY TESTING...
 
 ### ADMIN section
 
