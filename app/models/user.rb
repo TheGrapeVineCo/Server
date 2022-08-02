@@ -6,4 +6,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   has_many :comments
   has_many :wine_listings, through: :comments
+
+  # def make_admin!
+  #   self.update_attribute(:admin, true)
+  # end
 end
