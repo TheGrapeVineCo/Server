@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :comment do
-    user { Faker::Internet.safe_email }
-    wine_listing { rand(1..6) }
-    user_comment { Faker::Hipster.sentence }
+    user_id { 1 }
+    wine_listing_id { 1 }
+    user_comment { "Test comment" }
   end
 end

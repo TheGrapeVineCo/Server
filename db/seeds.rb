@@ -15,6 +15,7 @@ if User.count == 0
   (1..10).each do |user|
     User.create(
       email: Faker::Internet.safe_email,
+      username: Faker::Internet.username,
       password: Faker::Internet.password,
       password_confirmation: Faker::Internet.password,
       admin: false,
@@ -22,6 +23,7 @@ if User.count == 0
   end
   User.create(
     email: "testadmin@test.com",
+    username: "admin",
     password: "adminpw1",
     password_confirmation: "adminpw1",
     admin: true,

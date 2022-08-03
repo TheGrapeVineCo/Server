@@ -9,7 +9,7 @@ GET http://localhost:4000/api/wine_listings
 
 POST http://localhost:4000/api/wine_listings
 Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTQzNjcxMywiZXhwIjoxNjU5NTIzMTEzLCJqdGkiOiIxNWQ4Nzc5Ny04YTQ2LTQ5ZjYtODQ4OS00M2U5OTg2NjFlMDQifQ.YIAE8CHGohsYB_V4RQ5uScS9J8yfnEo5CfwlWH_Jf7k
 
 {
     "brand": "Testing Wine id 8",
@@ -148,7 +148,7 @@ Content-Type: application/json
 
 {  
     "user": {
-        "email": "2params@test.com",
+        "email": "jacqui2@test.com",
         "password": "password10"
     }
 }
@@ -160,8 +160,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "username": "Username3",
-        "email": "Username3@test.com",
+        "username": "testtime3",
+        "email": "mrtest3@test.com",
         "password": "password",
         "password_confirmation": "password"
     }
@@ -175,10 +175,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "username": "Username3",
-        "email": "Username3@test.com",
-        "password": "password",
-        "password_confirmation": "password"
+        "email": "mrtest@test.com",
+        "password": "password"
     }
 }
 
@@ -218,6 +216,10 @@ Content-Type: application/json
 GET http://localhost:4000/api/categories
 
 
+### ----------------------------------------------
+### COMMENTS TESTS ALL PASSED
+
+
 ### Gets all comments
 ### Passes with 200 response
 GET http://localhost:4000/comments
@@ -225,14 +227,89 @@ Content-Type: application/json
 
 
 ### Create comment
-### Passes with 201 created response
+### Passes with 201 created response if user signed in with token
+### Returns 401 if not signed in
 POST http://localhost:4000/comments
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTQwODczMSwiZXhwIjoxNjU5NDk1MTMxLCJqdGkiOiIxMmU1YjM0Zi0xYWRkLTQyMTItOTYzOC1lMjIxYmY0MWNjYTAifQ.V5WvayMyBnYgpKeIdTl_k81z6pgckN9khjDgfKj4OsA
 
 {  
     "comment": {
         "user_comment": "Test comment 1",
-        "user_id": 1,
+        "user_id": 12,
+        "wine_listing_id": 1
+    }
+}
+
+### Create comment
+### Passes with 201 created response
+POST http://localhost:4000/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTQwODczMSwiZXhwIjoxNjU5NDk1MTMxLCJqdGkiOiIxMmU1YjM0Zi0xYWRkLTQyMTItOTYzOC1lMjIxYmY0MWNjYTAifQ.V5WvayMyBnYgpKeIdTl_k81z6pgckN9khjDgfKj4OsA
+
+{  
+    "comment": {
+        "user_comment": "Test comment 2",
+        "user_id": 12,
+        "wine_listing_id": 1
+    }
+}
+
+### Create comment with no content in user_comment
+### Passes with 422 unprocessable entity - user comment can't be blank
+POST http://localhost:4000/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTQwODczMSwiZXhwIjoxNjU5NDk1MTMxLCJqdGkiOiIxMmU1YjM0Zi0xYWRkLTQyMTItOTYzOC1lMjIxYmY0MWNjYTAifQ.V5WvayMyBnYgpKeIdTl_k81z6pgckN9khjDgfKj4OsA
+
+{  
+    "comment": {
+        "user_comment": "",
+        "user_id": 12,
+        "wine_listing_id": 1
+    }
+}
+
+### Update comment
+### Passes with 200 response
+PATCH http://localhost:4000/comments/16
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM5OTUwOCwiZXhwIjoxNjU5NDg1OTA4LCJqdGkiOiJiMDZkZDBkZC0zMTRiLTQwODItOTBiYy1kYjIwYjc2MTI2MzcifQ.y12cXmWH8RBaYnRsEewMM7J8F8afZQFTq1wC3xM8Dd0
+
+{  
+    "comment": {
+        "id": 16,
+        "user_comment": "Test comment 1 has been updated",
+        "user_id": 12,
+        "wine_listing_id": 1
+    }
+}
+
+### Delete own comment
+### Passes with 204 no content response
+DELETE  http://localhost:4000/comments/17
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM5OTUwOCwiZXhwIjoxNjU5NDg1OTA4LCJqdGkiOiJiMDZkZDBkZC0zMTRiLTQwODItOTBiYy1kYjIwYjc2MTI2MzcifQ.y12cXmWH8RBaYnRsEewMM7J8F8afZQFTq1wC3xM8Dd0
+
+{  
+    "comment": {
+        "id": 17,
+        "user_comment": "Test comment 1",
+        "user_id": 12,
+        "wine_listing_id": 1
+    }
+}
+
+### Delete another users comment
+### Passes with 200 - error of unauthorised action
+DELETE  http://localhost:4000/comments/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM5OTUwOCwiZXhwIjoxNjU5NDg1OTA4LCJqdGkiOiJiMDZkZDBkZC0zMTRiLTQwODItOTBiYy1kYjIwYjc2MTI2MzcifQ.y12cXmWH8RBaYnRsEewMM7J8F8afZQFTq1wC3xM8Dd0
+
+{  
+    "comment": {
+        "id": 1,
+        "user_comment": "Test comment 1",
+        "user_id": 12,
         "wine_listing_id": 1
     }
 }
