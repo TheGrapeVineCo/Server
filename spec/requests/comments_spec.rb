@@ -37,7 +37,7 @@ RSpec.describe "/comments", type: :request do
                                 wine_listing_id: 1,
                                 user_comment: "Test comment 1")
     FactoryBot.create(:comment, user_id: 1,
-                                wine_listing_id: 2,
+                                wine_listing_id: 1,
                                 user_comment: "Test comment 2")
   end
 
@@ -45,7 +45,7 @@ RSpec.describe "/comments", type: :request do
     it "should return user comments" do
       get "/comments"
       expect(response).to have_http_status(:success)
-      # expect(JSON.parse(response.body).size).to eq(2)
+      expect(JSON.parse(response.body).size).to eq(2)
     end
   end
 
@@ -56,9 +56,16 @@ RSpec.describe "/comments", type: :request do
       expect(response.body).to include("Test comment 1")
     end
 
-    describe "should not allow user to post unless signed in" do
+    describe "should not allow user to post a comment unless signed in" do
       it "should return 401 unauthorized" do
         post "/comments"
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    describe "should allow a user to update a comment" do
+      it "should return 200 response" do
+        patch "/comments/1"
         expect(response).to have_http_status(:unauthorized)
       end
     end
