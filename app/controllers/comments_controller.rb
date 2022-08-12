@@ -1,9 +1,11 @@
 class CommentsController < ApplicationController
   # ensures only authenticated users can post
-  before_action :authenticate_user!, except: [:index, :show]
+
   before_action :set_comment, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :verify_ownership, only: [:update, :destroy]
 
+  respond_to :json
   # GET /comments
   def index
     # @comments = Comment.transform_comment
@@ -29,7 +31,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.create(comment_params)
 
     if @comment.save
-      render json: @comment, status: :created, location: @comment
+      render json: @comment.transform_comment, status: :created #, location: @comment
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
