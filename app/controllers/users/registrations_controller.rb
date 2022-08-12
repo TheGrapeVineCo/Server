@@ -3,11 +3,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   respond_to :json
 
-  # POST /comments
-  # def create
-  #   @user = User.create(sign_up_params);
-  # end
-
   private
 
   def respond_with(resource, _opts = {})
