@@ -160,8 +160,8 @@ Content-Type: application/json
 
 {  
     "user": {
-        "username": "testtime3",
-        "email": "mrtest3@test.com",
+        "username": "testtime5",
+        "email": "mrtest5@test.com",
         "password": "password",
         "password_confirmation": "password"
     }
@@ -175,7 +175,7 @@ Content-Type: application/json
 
 {  
     "user": {
-        "email": "mrtest@test.com",
+        "email": "jacqui@test.com",
         "password": "password"
     }
 }
@@ -184,25 +184,26 @@ Content-Type: application/json
 ### PASS with token from the login session
 DELETE http://localhost:4000/api/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM2MTY1NywiZXhwIjoxNjU5NDQ4MDU3LCJqdGkiOiIzYzM1MDg0YS0zMWU3LTRiMDItODMzNS0wYTkzOGYxODMxZDYifQ.vwQK9pe5hixTcL2MxrMGfmnCCQXgh4eghLY9VG14Jns
-
-### Test for current user is admin?
-### This test might need to be ran with rspec
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NCIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY2MDM2Njc2NCwiZXhwIjoxNjYwNDUzMTY0LCJqdGkiOiI4NTJmOWJiYi02MjFhLTQ2NDYtYTlmZS05OWQ1NzY4MWU1YmEifQ.8SvBOMykytf0TBW94FsUsElLLvxoORb3YzBg65S9Kdg
 
 
-
-###Not yet tested
+# --------------------------------------------
+###Not yet tested --> WIP
 
 ### ADMIN section
 
+# Tested and signs up user with 200 response
 ### Create Admin user
 POST http://localhost:4000/api/sign_up
 Content-Type: application/json
 
 {  
     "user": {
-        "email": "admin1@gmail.com",
-        "password": "password1"
+        "username": "admin4",
+        "email": "admin4@gmail.com",
+        "password": "password",
+        "password_confirmation": "password",
+        "admin": true
     }
 }
 
@@ -231,13 +232,13 @@ Content-Type: application/json
 ### Returns 401 if not signed in
 POST http://localhost:4000/comments
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTQwODczMSwiZXhwIjoxNjU5NDk1MTMxLCJqdGkiOiIxMmU1YjM0Zi0xYWRkLTQyMTItOTYzOC1lMjIxYmY0MWNjYTAifQ.V5WvayMyBnYgpKeIdTl_k81z6pgckN9khjDgfKj4OsA
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY2MDM2NjI5MSwiZXhwIjoxNjYwNDUyNjkxLCJqdGkiOiJhZjFjMmI2Zi1mMTBhLTQ0Y2QtYTI5NS1lMjVlNjViMjA0MmYifQ.KOEbmx-gauCCwRFLTsc5Bgug1WoAmboTQaakSpVgsfM
 
 {  
     "comment": {
-        "user_comment": "Test comment 1",
-        "user_id": 12,
-        "wine_listing_id": 1
+        "user_comment": "Test comment 3",
+        "user_id": 21,
+        "wine_listing_id": 3
     }
 }
 
@@ -259,57 +260,42 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhd
 ### Passes with 422 unprocessable entity - user comment can't be blank
 POST http://localhost:4000/comments
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTQwODczMSwiZXhwIjoxNjU5NDk1MTMxLCJqdGkiOiIxMmU1YjM0Zi0xYWRkLTQyMTItOTYzOC1lMjIxYmY0MWNjYTAifQ.V5WvayMyBnYgpKeIdTl_k81z6pgckN9khjDgfKj4OsA
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY2MDM2NTIzNSwiZXhwIjoxNjYwNDUxNjM1LCJqdGkiOiIzNDAzMWE4My0xZWQyLTQyMGMtOTgzMS00ZDE4MmUzMThkMDEifQ.rIJ_FtKiBTazalOR_UEsEwcOT3yyIlAlNQJ_Lxh_Ky0
 
 {  
     "comment": {
-        "user_comment": "",
-        "user_id": 12,
+        "user_comment": "Testing delete comment3",
+        "user_id": 21,
         "wine_listing_id": 1
     }
 }
 
 ### Update comment
-### Passes with 200 response
-PATCH http://localhost:4000/comments/16
+### Passes with 200 response, not possible if non-owner tries to update (200, unauthorised action)
+# Admin can update other users comments
+PATCH http://localhost:4000/comments/26
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM5OTUwOCwiZXhwIjoxNjU5NDg1OTA4LCJqdGkiOiJiMDZkZDBkZC0zMTRiLTQwODItOTBiYy1kYjIwYjc2MTI2MzcifQ.y12cXmWH8RBaYnRsEewMM7J8F8afZQFTq1wC3xM8Dd0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMyIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY2MDM2NjkzMiwiZXhwIjoxNjYwNDUzMzMyLCJqdGkiOiIyODllY2U4MS1jZDc3LTQ1NzctOTYzOC05NmI4ZjU2OGE2NTMifQ.Ji6oC2LUx1rBGSuYX9nq-UnUIWErzLX6Qvez6oJNsac
 
 {  
     "comment": {
-        "id": 16,
-        "user_comment": "Test comment 1 has been updated",
-        "user_id": 12,
+        "id": 26,
+        "user_comment": "Non-owner attempt Comment 26 has been updated",
+        "user_id": 13,
         "wine_listing_id": 1
     }
 }
+
 
 ### Delete own comment
 ### Passes with 204 no content response
-DELETE  http://localhost:4000/comments/17
+DELETE  http://localhost:4000/comments/26
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM5OTUwOCwiZXhwIjoxNjU5NDg1OTA4LCJqdGkiOiJiMDZkZDBkZC0zMTRiLTQwODItOTBiYy1kYjIwYjc2MTI2MzcifQ.y12cXmWH8RBaYnRsEewMM7J8F8afZQFTq1wC3xM8Dd0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY2MDM2NjI5MSwiZXhwIjoxNjYwNDUyNjkxLCJqdGkiOiJhZjFjMmI2Zi1mMTBhLTQ0Y2QtYTI5NS1lMjVlNjViMjA0MmYifQ.KOEbmx-gauCCwRFLTsc5Bgug1WoAmboTQaakSpVgsfM
 
-{  
-    "comment": {
-        "id": 17,
-        "user_comment": "Test comment 1",
-        "user_id": 12,
-        "wine_listing_id": 1
-    }
-}
 
 ### Delete another users comment
 ### Passes with 200 - error of unauthorised action
 DELETE  http://localhost:4000/comments/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY1OTM5OTUwOCwiZXhwIjoxNjU5NDg1OTA4LCJqdGkiOiJiMDZkZDBkZC0zMTRiLTQwODItOTBiYy1kYjIwYjc2MTI2MzcifQ.y12cXmWH8RBaYnRsEewMM7J8F8afZQFTq1wC3xM8Dd0
-
-{  
-    "comment": {
-        "id": 1,
-        "user_comment": "Test comment 1",
-        "user_id": 12,
-        "wine_listing_id": 1
-    }
-}
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMSIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY2MDM2NjI5MSwiZXhwIjoxNjYwNDUyNjkxLCJqdGkiOiJhZjFjMmI2Zi1mMTBhLTQ0Y2QtYTI5NS1lMjVlNjViMjA0MmYifQ.KOEbmx-gauCCwRFLTsc5Bgug1WoAmboTQaakSpVgsfM
