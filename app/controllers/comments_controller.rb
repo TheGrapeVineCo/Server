@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   def update
     if @comment.update(comment_params)
-      render json: @comment
+      render json: @comment.transform_comment
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -65,9 +65,12 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:user_id, :wine_listing_id, :user_comment)
   end
 
+  # if the current user is an admin then ownership check not necessary
   def verify_ownership
-    if current_user.id != @comment.user.id
-      render json: { error: "Unauthorised action" }
+    if !current_user.admin
+      if current_user.id != @comment.user.id
+        render json: { error: "Unauthorised action" }
+      end
     end
   end
 end
