@@ -8,8 +8,6 @@ class CommentsController < ApplicationController
   respond_to :json
   # GET /comments
   def index
-    # @comments = Comment.transform_comment
-    # @comments = Comment.order("updated_at DESC")
     @comments = []
     Comment.order("updated_at DESC").each do |comment|
       @comments << comment.transform_comment
@@ -29,7 +27,6 @@ class CommentsController < ApplicationController
   # POST /comments - only a user that is logged in & authorised can create a comment
   def create
     @comment = current_user.comments.create(comment_params)
-
     if @comment.save
       render json: @comment.transform_comment, status: :created #, location: @comment
     else
@@ -60,8 +57,6 @@ class CommentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def comment_params
-    # may need to update the params
-    # params.require(:comment).permit(:username, :wine_listing_id, :user_comment)
     params.require(:comment).permit(:user_id, :wine_listing_id, :user_comment)
   end
 
